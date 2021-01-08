@@ -1,18 +1,12 @@
 package com.company;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.net.Inet4Address;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Main {
 
@@ -20,7 +14,6 @@ public class Main {
     static Scanner scanner;
     static Scanner nav;
     static String location;
-    //    static ArrayList<String> members;
     static List<Member> members;
     static List<Member> filtered;
 
@@ -35,7 +28,8 @@ public class Main {
     }
 
     public static void navigation() {
-        System.out.println("View (v), Add (a), Column (col), Age (age), End (e)");
+        System.out.println("");
+        System.out.println("View (v), Column (col), Age (age), End (e)");
         String option = nav.nextLine();
         switch (option) {
             case "v":
@@ -43,9 +37,6 @@ public class Main {
                 break;
             case "e":
                 System.out.println("Goodbye");
-                break;
-            case "a":
-//                add();
                 break;
             case "age":
                 age();
@@ -75,7 +66,6 @@ public class Main {
             header = false;
         }
         scanner.close();
-//        navigation();
     }
 
     public static void view() {
@@ -86,30 +76,10 @@ public class Main {
         navigation();
     }
 
-
-    public static void add() {
-        try {
-            FileWriter fileWriter = new FileWriter(location);
-            System.out.println("TO STRING: " + fileWriter.toString());
-            String existing = "";
-            for (int i = 0; i < members.size(); i++) {
-                existing += members.get(i);
-            }
-            String newLine = "5,Sally,27,Yes";
-            fileWriter.write(existing + newLine);
-            System.out.println("TO STRING2: " + fileWriter.toString());
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        navigation();
-    }
-
     public static void age() {
         System.out.println("Older than? (type an age)");
         int age = nav.nextInt();
         nav.nextLine();
-//        List<Member> temp = members
         members
                 .stream()
                 .filter(a -> a.age > age)
@@ -133,11 +103,11 @@ public class Main {
                             if (col.equals("id")) {
                                 select = val.equals(Integer.toString(c.id));
                             } else if (col.equals("name")) {
-                                select = val.equals(c.name);
+                                select = val.toLowerCase().equals(c.name.toLowerCase());
                             } else if (col.equals("age")) {
                                 select = val.equals(Integer.toString(c.age));
                             } else if (col.equals("member")) {
-                                select = val.equals(c.member);
+                                select = val.toLowerCase().equals(c.member.toLowerCase());
                             }
                             return select;
                         }

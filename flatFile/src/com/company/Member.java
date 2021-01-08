@@ -1,7 +1,6 @@
 package com.company;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.*;
 
 public class Member {
     public int id;
@@ -18,10 +17,10 @@ public class Member {
 
     public String showData(){
         Field[] fields = this.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            field.setAccessible(true);
+//        for (Field field : fields) {
+//            field.setAccessible(true);
 //            System.out.println(field.getName());
-        }
+//        }
 
         String info = Integer.toString(id) + " " + name + " " + Integer.toString(age) + " " + member;
         return info;
